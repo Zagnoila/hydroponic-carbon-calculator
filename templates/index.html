@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Estimate your small hydroponic farm's annual carbon footprint, explore seven emissions sources, and compare growing decisions.">
+  <meta name="theme-color" content="#1c5545">
+  <title>Growprint — A little farm, a clearer footprint</title>
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="/static/vendor/chart.umd.js" defer></script>
+  <script src="/static/script.js" defer></script>
+</head>
+<body>
+  <a href="#farm" class="skip-link">Skip to calculator</a>
+  <header class="site-header wrap">
+    <a class="brand" href="#top" aria-label="Growprint home"><svg viewBox="0 0 36 36" aria-hidden="true"><path d="M18 31V16M18 23C5 24 4 14 5 8c10-1 14 5 13 15ZM18 17C18 5 27 4 32 4c0 9-4 14-14 13Z"/></svg>growprint<span class="brand-dot">.</span></a>
+    <span class="header-label">A FIELD GUIDE TO YOUR FOOTPRINT</span>
+    <a class="quiet-link" href="#method">How it works <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="top" class="wrap">
+    <section class="hero" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow"><span class="tiny-leaf" aria-hidden="true">✳</span> FOR SMALL HYDROPONIC GROWERS</p>
+        <h1 id="page-title">Small farm.<br><em>Clearer footprint.</em></h1>
+        <p class="hero-copy">See what goes into your grow. Turn your farm’s everyday inputs into an annual carbon estimate, one source at a time.</p>
+        <a href="#farm" class="hero-link">Let’s measure your grow <span aria-hidden="true">↓</span></a>
+      </div>
+      <div class="grow-illustration" role="img" aria-label="Illustration of three leafy plants growing above a hydroponic water reservoir">
+        <svg viewBox="0 0 420 330" aria-hidden="true">
+          <defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="#bac6b4"/></pattern></defs>
+          <circle cx="213" cy="163" r="144" fill="#e3e9d7"/><path d="M37 14h344v290H37z" fill="url(#dots)"/>
+          <path d="M73 221h275l-18 74H92z" fill="#1c5545"/><path d="M78 235h266" stroke="#78a173" stroke-width="2"/><path d="M86 264q30-14 60 0t60 0 60 0 70 0" fill="none" stroke="#accbd1" stroke-width="3"/>
+          <path d="M66 214h290v16H66z" fill="#b9c9ab"/><ellipse cx="128" cy="215" rx="24" ry="5" fill="#173c32"/><ellipse cx="212" cy="215" rx="24" ry="5" fill="#173c32"/><ellipse cx="296" cy="215" rx="24" ry="5" fill="#173c32"/>
+          <g fill="none" stroke="#d9e5cc" stroke-width="2"><path d="M128 228v34m0-12-10 9m10-17 12 10M212 228v41m0-18-12 9m12-18 12 10M296 228v34m0-12-10 9m10-17 12 10"/></g>
+          <g stroke="#1c5545" stroke-width="3" stroke-linecap="round"><path d="M128 214v-68m84 68v-91m84 91v-68"/></g>
+          <g fill="#4d7e54"><path d="M128 185c-34-2-48-25-43-44 30-1 48 17 43 44ZM212 166c-35-1-51-25-47-48 32 0 49 17 47 48ZM296 184c-31-3-45-26-41-45 29 0 46 17 41 45Z"/></g>
+          <g fill="#83a16b"><path d="M128 167c0-34 20-49 40-44 2 29-16 47-40 44ZM212 147c-1-35 19-53 43-48 3 31-18 49-43 48ZM296 166c-1-32 19-50 40-45 2 29-15 46-40 45Z"/></g>
+          <g stroke="#c7d5b8" stroke-width="1.5"><path d="m93 150 30 28m40-46-30 27m40-32 32 31m42-50-30 30m46 12 27 26m38-45-27 26"/></g>
+          <circle cx="324" cy="59" r="23" fill="#e7bb62"/><path d="M324 23v-9m0 90v-9m36-36h9m-90 0h9m61-25 6-6m-63 63 6-6m51 0 6 6m-63-63 6 6" stroke="#bc8c39" stroke-width="1.5"/>
+          <path d="M63 290H36V176h37" fill="none" stroke="#71979b" stroke-width="3"/><circle cx="37" cy="177" r="6" fill="#f4f3e9" stroke="#71979b" stroke-width="2"/>
+        </svg>
+        <div class="illustration-label"><span class="status-dot"></span> GROW A LITTLE. UNDERSTAND MORE.</div>
+      </div>
+    </section>
+
+    <div class="intro-strip"><span><strong>01</strong> Enter your inputs</span><span><strong>02</strong> Calculate in one click</span><span><strong>03</strong> Find your biggest sources</span></div>
+
+    <div class="calculator-layout">
+      <aside class="sidebar" aria-label="Calculator sections">
+        <div class="sticky-nav">
+          <p class="eyebrow">YOUR GROW, BY THE NUMBERS</p>
+          <nav>{% for section in sections %}<a href="#{{ section.id }}"><span>0{{ loop.index }}</span>{{ section.short }}</a>{% endfor %}<a href="#results"><span>↳</span>Your footprint</a></nav>
+          <div class="side-note"><span aria-hidden="true">↗</span><p>Start with what you know.</p><small>Blank activity fields count as zero. You can adjust any input and calculate again.</small></div>
+        </div>
+      </aside>
+
+      <form id="farm-form" novalidate>
+        <div class="form-toolbar"><p>Every input has a place.</p><button type="button" id="load-example" class="text-button">Load spreadsheet example <span aria-hidden="true">↗</span></button></div>
+        <p id="form-status" class="form-status" role="status"></p>
+        {% for section in sections %}
+        <section class="form-card" id="{{ section.id }}" aria-labelledby="{{ section.id }}-title">
+          <div class="section-heading"><span class="section-number">0{{ loop.index }}</span><h2 id="{{ section.id }}-title">{{ section.title }}</h2></div>
+          <p class="section-note">{{ section.note }}</p>
+          <div class="field-grid">
+            {% if section.id == 'farm' %}
+            <div class="field"><label for="farm_name">Farm name <small>optional</small></label><input type="text" id="farm_name" name="farm_name" placeholder="e.g. My kitchen grow" maxlength="100" autocomplete="off"><span class="field-error" id="error-farm_name"></span></div>
+            <div class="field"><label for="crop">Crop <small>optional</small></label><input type="text" id="crop" name="crop" placeholder="e.g. Lettuce" maxlength="100" autocomplete="off"><span class="field-error" id="error-crop"></span></div>
+            {% endif %}
+            {% for key, label, unit, example_value, cell, maximum in section.fields %}
+            <div class="field{% if key == 'hvac_kwh' %} wide-field{% endif %}">
+              <label for="{{ key }}">{{ label }}</label>
+              <div class="input-wrap"><input type="number" id="{{ key }}" name="{{ key }}" inputmode="decimal" min="0" max="{{ maximum }}" step="any" placeholder="0" aria-describedby="unit-{{ key }} error-{{ key }}{% if key == 'hvac_kwh' %} hvac-help{% endif %}"><span class="unit" id="unit-{{ key }}">{{ unit }}</span></div>
+              <span class="field-error" id="error-{{ key }}"></span>
+              {% if key == 'hvac_kwh' %}<small class="field-help" id="hvac-help">Only the farm’s share of heating, cooling or dehumidification. Avoid counting the same device twice.</small>{% endif %}
+            </div>
+            {% endfor %}
+          </div>
+        </section>
+        {% endfor %}
+
+        <details class="factor-panel" id="factor-panel">
+          <summary><span>Emission factors</span><small>Spreadsheet defaults · optional overrides</small></summary>
+          <div class="factor-content"><p>Each factor converts a unit of activity into kg CO₂e. Leave it blank to use the value shown; enter a local or supplier-specific value to override it. A factor of 0 is allowed.</p>
+            <div class="field-grid">{% for key, label, unit, default, cell in factors %}<div class="field"><label for="{{ key }}">{{ label }}</label><input type="number" id="{{ key }}" name="{{ key }}" min="0" max="1000000000" step="any" inputmode="decimal" placeholder="{{ default }}" aria-describedby="unit-{{ key }} error-{{ key }}"><small class="factor-unit" id="unit-{{ key }}">{{ unit }} · default {{ default }}</small><span class="field-error" id="error-{{ key }}"></span></div>{% endfor %}</div>
+            <p class="factor-source">The grid default is the workbook’s 2023 U.S. eGRID value. Other factors are illustrative screening estimates. <a href="{{ source_url }}" target="_blank" rel="noopener">View the reference ↗</a></p>
+          </div>
+        </details>
+        <div id="error-summary" class="error-summary" role="alert" tabindex="-1" hidden></div>
+        <div class="form-actions"><button class="primary-button" id="calculate" type="submit">Calculate My Footprint <span aria-hidden="true">↗</span></button><button id="reset" type="reset" class="reset-button">Reset</button></div>
+        <p class="privacy-note">Your farm inputs are used for this calculation and are not saved.</p>
+      </form>
+    </div>
+
+    <section id="results" class="results" aria-labelledby="results-title" tabindex="-1">
+      <div class="results-top"><div><p class="eyebrow">THE BIG PICTURE</p><h2 id="results-title">Your farm’s footprint.</h2></div><span class="result-badge" id="result-badge">Ready when you are</span></div>
+      <div id="empty-results" class="empty-results"><span class="empty-icon" aria-hidden="true">↳</span><div><h3>A little information. A lot more clarity.</h3><p>Fill in your farm details above, then calculate to see your annual estimate and emissions chart here.</p></div></div>
+      <div id="result-content" hidden>
+        <p id="result-description" class="result-description"></p>
+        <p id="stale-notice" class="stale-notice" hidden>Inputs have changed. Calculate again to refresh these results.</p>
+        <div class="metrics">
+          <article class="metric featured"><p>Total annual footprint</p><strong id="metric-total">—</strong><span>kg CO₂e / year</span><span class="metric-mark" aria-hidden="true">↗</span></article>
+          <article class="metric"><p>Per pound of produce</p><strong id="metric-pound">—</strong><span>kg CO₂e / lb</span></article>
+          <article class="metric"><p>Annual food production</p><strong id="metric-production">—</strong><span>lb / year</span></article>
+          <article class="metric"><p>Per square foot</p><strong id="metric-area">—</strong><span>kg CO₂e / sq ft / year</span></article>
+        </div>
+        <div class="chart-card"><div class="chart-heading"><div><p class="eyebrow">SEVEN SOURCES. ONE FOOTPRINT.</p><h3>Where your emissions come from</h3></div><p>Hover a slice or select a category<br>to take a closer look.</p></div>
+          <div class="chart-layout"><div class="chart-container"><canvas id="emissions-chart" role="img" aria-label="Pie chart of annual carbon emissions by category. Exact values are in the table below."></canvas><p id="zero-chart" hidden>No emissions to plot yet.<br>Add activity above and calculate again.</p></div><div><div id="chart-legend" class="chart-legend" aria-label="Emissions categories"></div><p class="chart-insight" id="chart-insight"></p></div></div>
+        </div>
+        <div class="breakdown-card"><div class="breakdown-heading"><h3>Emissions breakdown</h3><span>kg CO₂e / year</span></div><div class="table-scroll"><table><caption class="visually-hidden">Annual emissions and share of total for each source</caption><thead><tr><th scope="col">Source</th><th scope="col">Annual emissions</th><th scope="col">Share of total</th></tr></thead><tbody id="breakdown-body"></tbody><tfoot><tr><th scope="row">Total</th><td id="breakdown-total"></td><td id="breakdown-share"></td></tr></tfoot></table></div></div>
+        <div class="extra-metrics"><p>Per crop cycle <strong id="metric-cycle"></strong> <span>kg CO₂e / cycle</span></p><p>Annual electricity <strong id="metric-electricity"></strong> <span>kWh / year</span></p></div>
+        <div id="result-warnings" class="result-warnings" hidden></div>
+      </div>
+    </section>
+    <section id="method" class="method"><div><p class="eyebrow">A NOTE ON THE NUMBERS</p><h2>An estimate to<br><em>grow from.</em></h2></div><div><p>CO₂e means “carbon dioxide equivalent”—a shared unit for the warming impact of different greenhouse gases. This calculator follows the supplied Hydroponic Carbon Footprint Calculator workbook.</p><p>It covers purchased electricity, water, nutrients, growing media, packaging, farm-related travel and annualized equipment. Building construction and employee commuting are outside this estimate.</p><p>This is a screening estimate, not a full life-cycle assessment. Local energy and supplier data will make it more relevant to your grow.</p><a href="{{ source_url }}" target="_blank" rel="noopener">Explore the source spreadsheet <span aria-hidden="true">↗</span></a></div></section>
+  </main>
+  <footer class="wrap"><span class="footer-brand">growprint.</span><span>Designed & built for AgTech · Ian Rosenthal</span><a href="#top">Back to top ↑</a></footer>
+  <script id="example-data" type="application/json">{{ example | tojson }}</script>
+  <noscript><p class="noscript">Turn on JavaScript to send your farm inputs to the Python calculator and view the results.</p></noscript>
+</body>
+</html>

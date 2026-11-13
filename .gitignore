@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+.DS_Store
+.vercel/
+.env*
+reference/*.xlsx
+submission/
+public/
