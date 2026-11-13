@@ -4,6 +4,8 @@ A single-page carbon footprint calculator for small hydroponic farms, built for 
 
 Enter your farm's production, electricity, water, materials, travel and equipment. Python calculates the annual footprint, crop-cycle emissions, production and intensity metrics. The page updates in place with an interactive seven-category pie chart and an accessible breakdown table.
 
+**Live website:** [ian-rosenthal-growprint.vercel.app](https://ian-rosenthal-growprint.vercel.app/)
+
 ## Run locally
 
 Python 3.9 or newer is required. In a terminal, inside this project folder:
